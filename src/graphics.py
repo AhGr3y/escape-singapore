@@ -6,12 +6,15 @@ class Window:
     def __init__(self, width, height):
         # Initialize root window.
         self._root = Tk()
-        # Set title of root window.
         self._root.title("Escape Singapore")
+        # Initialize background color
+        self._bg_color = "black"
         # Initialize a canvas
-        self._canvas = Canvas(self._root, background="black", width=width, height=height)
-        # Put the canvas on the root window
-        self._canvas.grid()
+        self._canvas = Canvas(self._root, background=self._bg_color, width=width, height=height)
+        self._canvas.grid(column=0, row=0, sticky=NSEW)
+        # Configure grid to expand slave when master expands
+        self._root.grid_columnconfigure(0, weight=1)
+        self._root.grid_rowconfigure(0, weight=1)
         # Set action after window is closed
         self._root.protocol("WM_DELETE_WINDOW", self.close)
 
