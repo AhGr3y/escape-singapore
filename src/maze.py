@@ -1,6 +1,6 @@
 import random
 
-from graphics import Point
+from graphics import Point, Line
 from cell import Cell
 
 class Maze():
@@ -17,9 +17,13 @@ class Maze():
         self.seed = seed
         if self.seed is not None:
             random.seed(seed)
+        self._blocked_exit_top = False
+        self._blocked_exit_left = False
         self._draw_cells()
         self._break_entrance_and_exit()
         self._break_walls()
+        self._block_entrance()
+        self._block_exit()
 
     def _draw_cells(self, fill_color="white"):
 
@@ -146,6 +150,54 @@ class Maze():
                     walls.append(r_wall)
         
         return walls
+    
+    def _block_entrance(self):
+
+        # Logically remove entrance
+        entrance_cell = self._cells[0][0]
+        entrance_cell.has_left_wall = True
+        
+        # Draw red wall at entrance
+        entrance_cell_left_wall = Line(entrance_cell.p1, Point(entrance_cell.p1.x, entrance_cell.p2.y))
+        entrance_cell_left_wall.draw(self.win._canvas, "red")
+
+    def _block_exit(self):
+
+        exit_cell = self._cells[self._num_cols - 1][self._num_rows - 1]
+
+        # Create exit cell top wall if it does not exist
+        if exit_cell.has_top_wall == False:
+            exit_cell.has_top_wall = True
+            self._blocked_exit_top = True
+        
+            # Draw red wall at exit top wall
+            exit_cell_top_wall = Line(exit_cell.p1, Point(exit_cell.p2.x, exit_cell.p1.y))
+            exit_cell_top_wall.draw(self.win._canvas, "yellow")
+
+        # Create exit cell left wall if it does not exist
+        if exit_cell.has_left_wall == False:
+            exit_cell.has_left_wall = True
+            self._blocked_exit_left = True
+        
+            # Draw red wall at exit top wall
+            exit_cell_left_wall = Line(exit_cell.p1, Point(exit_cell.p1.x, exit_cell.p2.y))
+            exit_cell_left_wall.draw(self.win._canvas, "yellow")
+
+    def _unblock_exit(self):
+
+        exit_cell = self._cells[self._num_cols - 1][self._num_rows - 1]
+
+        # Unblock exit top if blocked
+        if self._blocked_exit_top:
+            self._blocked_exit_top = False
+            exit_cell.has_top_wall = False
+            exit_cell.draw()
+
+        # Unblock exit left if blocked
+        if self._blocked_exit_left:
+            self._blocked_exit_left = False
+            exit_cell.has_left_wall = False
+            exit_cell.draw()
 
 class Wall():
 
