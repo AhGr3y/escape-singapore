@@ -1,5 +1,4 @@
 from graphics import (
-    Window,
     Point,
     Line,
 )

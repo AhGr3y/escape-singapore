@@ -1,15 +1,11 @@
 import random
 
-from graphics import (
-    Window,
-    Point,
-)
-
+from graphics import Point
 from cell import Cell
 
 class Maze():
 
-    def __init__(self, x1, y1, num_rows, num_cols, cell_width, cell_height, win=None):
+    def __init__(self, x1, y1, num_rows, num_cols, cell_width, cell_height, win=None, seed=None):
         self._x1 = x1
         self._y1 = y1
         self._num_rows = num_rows
@@ -18,6 +14,12 @@ class Maze():
         self._cell_height = cell_height
         self.win = win
         self._cells = []
+        self.seed = seed
+        if self.seed is not None:
+            random.seed(seed)
+        self._draw_cells()
+        self._break_entrance_and_exit()
+        self._break_walls()
 
     def _draw_cells(self, fill_color="white"):
 
@@ -186,13 +188,3 @@ class CellDisjointSet():
             else:
                 my_parent.parent = their_parent
                 their_parent.size += 1
-
-
-win = Window(800, 800)
-maze = Maze(50, 200, 10, 14, 50, 50, win)
-#maze = Maze(50, 200, 5, 5, 50, 50, win)
-maze._draw_cells()
-maze._break_entrance_and_exit()
-maze._break_walls()
-win._root.mainloop()
-
