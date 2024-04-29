@@ -31,10 +31,17 @@ class Character():
             self.enable_movement()
 
     def enable_movement(self):
+        # Enable movement via arrow keys
         self._maze.win._root.bind("<Right>", self.move_right)
         self._maze.win._root.bind("<Left>", self.move_left)
         self._maze.win._root.bind("<Up>", self.move_up)
         self._maze.win._root.bind("<Down>", self.move_down)
+
+        # Enable movement via wasd keys
+        self._maze.win._root.bind("<KeyPress-d>", self.move_right)
+        self._maze.win._root.bind("<KeyPress-a>", self.move_left)
+        self._maze.win._root.bind("<KeyPress-w>", self.move_up)
+        self._maze.win._root.bind("<KeyPress-s>", self.move_down)
 
     def move_right(self, event):
         # Stop character from exiting edge of maze
