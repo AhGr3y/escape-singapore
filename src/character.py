@@ -1,7 +1,5 @@
 from tkinter import PhotoImage
 
-from bot import Bot
-
 class Character():
 
     def __init__(self, row, col, maze=None, character="default"):

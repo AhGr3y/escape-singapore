@@ -6,7 +6,6 @@ class Window:
         # Initialize root window.
         self._root = Tk()
         self._root.title("Escape Singapore")
-        #self._root.attributes("-fullscreen", 1)
         # Initialize background color
         self._bg_color = "black"
         # Configure grid to make canvas expandable
