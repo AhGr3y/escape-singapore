@@ -45,6 +45,6 @@ class Item():
         if self._collected:
             self._img = None
             
-        self._body = self._maze.win._canvas.create_image(self._x, self._y, image=self._img)
+        self._body = self._maze.win._main_canvas.create_image(self._x, self._y, image=self._img)
 
         self._maze.win._root.after(100, self.draw)

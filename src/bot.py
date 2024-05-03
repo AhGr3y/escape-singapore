@@ -44,7 +44,7 @@ class Bot():
                 print("Error loading character image:", e)
                 return
             
-            self._body = self._maze.win._canvas.create_image(x, y, image=self._img)
+            self._body = self._maze._win._content_canvas.create_image(x, y, image=self._img)
 
     def patrol(self):
 
@@ -62,7 +62,7 @@ class Bot():
 
             # Move bot down
             if self._move_direction == "down":
-                self._maze.win._canvas.move(self._body, 0, self._maze._cell_height)
+                self._maze._win._content_canvas.move(self._body, 0, self._maze._cell_height)
                 self._row += 1
 
                 # End the game if bot encounters player; additional hit box to make up for the delay, if not, player can touch bot from the back
@@ -71,7 +71,7 @@ class Bot():
 
             # Move bot up
             if self._move_direction == "up":
-                self._maze.win._canvas.move(self._body, 0, -self._maze._cell_height)
+                self._maze._win._content_canvas.move(self._body, 0, -self._maze._cell_height)
                 self._row -= 1
 
                 # End the game if bot encounters player; additional hit box to make up for the delay, if not, player can touch bot from the back
@@ -82,8 +82,8 @@ class Bot():
             if self._col == self._player._col and self._row == self._player._row:
                 self.game_over()
 
-            self._maze.win._root.after(300, self.patrol)
+            self._maze._win._root.after(300, self.patrol)
 
     def game_over(self):
-        self._maze.win._root.destroy()
+        self._maze._win._root.destroy()
         print("Game over!")

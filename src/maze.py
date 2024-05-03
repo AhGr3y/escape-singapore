@@ -12,23 +12,22 @@ class Maze():
         self._num_cols = num_cols
         self._cell_width = cell_width
         self._cell_height = cell_height
-        self.win = win
+        self._win = win
         self._cells = []
         self.seed = seed
         if self.seed is not None:
             random.seed(seed)
         self._blocked_exit_top = False
         self._blocked_exit_left = False
-        self._draw_cells()
-        self._break_entrance_and_exit()
-        self._break_walls()
-        self._block_entrance()
-        self._block_exit()
+        self.draw_cells()
+        self.break_entrance_and_exit()
+        self.break_walls()
+        self.block_entrance()
 
-    def _draw_cells(self, fill_color="white"):
+    def draw_cells(self, fill_color="white"):
 
         # Raise error if root window is not set.
-        if self.win is None:
+        if self._win is None:
             raise ValueError("Root window is not set.")
 
         # Loop through cols
@@ -45,7 +44,7 @@ class Maze():
                 y1 = self._y1 + self._cell_height * j
                 y2 = y1 + self._cell_height
                 # Get cell
-                cell = Cell(Point(x1, y1), Point(x2, y2), self.win)
+                cell = Cell(Point(x1, y1), Point(x2, y2), self._win)
                 # Add cell to col
                 col.append(cell)
                 # Draw cell
@@ -56,23 +55,23 @@ class Maze():
             self._cells.append(col)
         # Exit looping thru cols
         
-    def _break_entrance_and_exit(self):
+    def break_entrance_and_exit(self):
 
         # Get entrance cell
         entrance_cell = self._cells[0][0]
         # Break left wall of entrance
-        entrance_cell.has_left_wall = False
+        entrance_cell._has_left_wall = False
         # Redraw entrance cell
         entrance_cell.draw()
 
         # Get exit cell
         exit_cell = self._cells[self._num_cols - 1][self._num_rows - 1]
         # Break right wall of exit
-        exit_cell.has_right_wall = False
+        exit_cell._has_right_wall = False
         # Redraw exit cell
         exit_cell.draw()
 
-    def _break_walls(self):
+    def break_walls(self):
         
         # Get list of randomized walls
         walls = self._get_walls()
@@ -107,10 +106,10 @@ class Maze():
                     left_cds.union(right_cds)
                     # break wall and redraw both cells
                     left_cell = self._cells[i][j]
-                    left_cell.has_right_wall = False
+                    left_cell._has_right_wall = False
                     left_cell.draw()
                     right_cell = self._cells[i + 1][j]
-                    right_cell.has_left_wall = False
+                    right_cell._has_left_wall = False
                     right_cell.draw()
 
             if wall.direction == 'b': # wall is a bottom wall of a cell
@@ -125,10 +124,10 @@ class Maze():
                     top_cds.union(bottom_cds)
                     # break wall and redraw both cells
                     top_cell = self._cells[i][j]
-                    top_cell.has_bottom_wall = False
+                    top_cell._has_bottom_wall = False
                     top_cell.draw()
                     bottom_cell = self._cells[i][j + 1]
-                    bottom_cell.has_top_wall = False
+                    bottom_cell._has_top_wall = False
                     bottom_cell.draw()
                 
     def _get_walls(self):
@@ -151,52 +150,52 @@ class Maze():
         
         return walls
     
-    def _block_entrance(self):
+    def block_entrance(self):
 
         # Logically remove entrance
         entrance_cell = self._cells[0][0]
-        entrance_cell.has_left_wall = True
+        entrance_cell._has_left_wall = True
         
         # Draw red wall at entrance
-        entrance_cell_left_wall = Line(entrance_cell.p1, Point(entrance_cell.p1.x, entrance_cell.p2.y))
-        entrance_cell_left_wall.draw(self.win._canvas, "red")
+        entrance_cell_left_wall = Line(entrance_cell._p1, Point(entrance_cell._p1.x, entrance_cell._p2.y))
+        entrance_cell_left_wall.draw(self._win._content_canvas, "red")
 
-    def _block_exit(self):
+    def block_exit(self):
 
         exit_cell = self._cells[self._num_cols - 1][self._num_rows - 1]
 
         # Create exit cell top wall if it does not exist
-        if exit_cell.has_top_wall == False:
-            exit_cell.has_top_wall = True
+        if exit_cell._has_top_wall == False:
+            exit_cell._has_top_wall = True
             self._blocked_exit_top = True
         
             # Draw red wall at exit top wall
-            exit_cell_top_wall = Line(exit_cell.p1, Point(exit_cell.p2.x, exit_cell.p1.y))
-            exit_cell_top_wall.draw(self.win._canvas, "yellow")
+            exit_cell_top_wall = Line(exit_cell._p1, Point(exit_cell._p2.x, exit_cell._p1.y))
+            exit_cell_top_wall.draw(self._win._content_canvas, "yellow")
 
         # Create exit cell left wall if it does not exist
-        if exit_cell.has_left_wall == False:
-            exit_cell.has_left_wall = True
+        if exit_cell._has_left_wall == False:
+            exit_cell._has_left_wall = True
             self._blocked_exit_left = True
         
             # Draw red wall at exit top wall
-            exit_cell_left_wall = Line(exit_cell.p1, Point(exit_cell.p1.x, exit_cell.p2.y))
-            exit_cell_left_wall.draw(self.win._canvas, "yellow")
+            exit_cell_left_wall = Line(exit_cell._p1, Point(exit_cell._p1.x, exit_cell._p2.y))
+            exit_cell_left_wall.draw(self._win._content_canvas, "yellow")
 
-    def _unblock_exit(self):
+    def unblock_exit(self):
 
         exit_cell = self._cells[self._num_cols - 1][self._num_rows - 1]
 
         # Unblock exit top if blocked
         if self._blocked_exit_top:
             self._blocked_exit_top = False
-            exit_cell.has_top_wall = False
+            exit_cell._has_top_wall = False
             exit_cell.draw()
 
         # Unblock exit left if blocked
         if self._blocked_exit_left:
             self._blocked_exit_left = False
-            exit_cell.has_left_wall = False
+            exit_cell._has_left_wall = False
             exit_cell.draw()
 
 class Wall():
