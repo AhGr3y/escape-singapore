@@ -121,4 +121,4 @@ class Character():
         # End game when character reaches the end
         if self._col == self._maze._num_cols - 1 and self._row == self._maze._num_rows - 1:
             self._maze._win._root.destroy()
-            print(f"You win!")
+            print(f"Congratulations! You have escaped successfully!")

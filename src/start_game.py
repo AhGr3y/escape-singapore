@@ -2,6 +2,7 @@ import random
 
 from graphics import Window
 from maze import Maze
+from path import Path
 from info_panel import InfoPanel
 from character import Character
 from bot import Bot
@@ -12,6 +13,8 @@ class StartGame():
     def __init__(self):
         win = Window()
         maze = Maze(90, 60, 12, 17, 80, 80, win)
+        escape = Path(17, 12, maze)
+        escape.draw_escape()
         info = InfoPanel([], win)
         mc = Character(0, 0, maze)
         bot1_1 = Bot(1, random.randint(0, 11), 1, mc, maze)

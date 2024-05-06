@@ -39,7 +39,7 @@ class Bot():
             y = self._maze._y1 + self._maze._cell_height/2 + (self._row * self._maze._cell_height)
 
             try:
-                self._img = PhotoImage(file="./assets/images/level-1-bot.png")
+                self._img = PhotoImage(file="./assets/images/little-ruffian.png")
             except Exception as e:
                 print("Error loading character image:", e)
                 return
@@ -67,7 +67,7 @@ class Bot():
 
                 # End the game if bot encounters player; additional hit box to make up for the delay, if not, player can touch bot from the back
                 if self._col == self._player._col and self._row - 1 == self._player._row:
-                    self.game_over()
+                    self.game_over_1()
 
             # Move bot up
             if self._move_direction == "up":
@@ -76,14 +76,14 @@ class Bot():
 
                 # End the game if bot encounters player; additional hit box to make up for the delay, if not, player can touch bot from the back
                 if self._col == self._player._col and self._row + 1 == self._player._row:
-                    self.game_over()
+                    self.game_over_1()
 
             # End the game if bot encounters player
             if self._col == self._player._col and self._row == self._player._row:
-                self.game_over()
+                self.game_over_1()
 
             self._maze._win._root.after(300, self.patrol)
 
-    def game_over(self):
+    def game_over_1(self):
         self._maze._win._root.destroy()
-        print("Game over!")
+        print("You got caught by a little ruffian! Game over!")
