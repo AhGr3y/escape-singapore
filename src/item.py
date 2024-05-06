@@ -34,17 +34,18 @@ class Item():
             # player collects item
             if self._row == self._player._row and self._col == self._player._col:
                 self._collected = True
+                self._maze.unblock_exit()
 
-            if self._name == "passport":
+            if self._name == "key":
                 try:
-                    self._img = PhotoImage(file="./assets/images/passport.png")
+                    self._img = PhotoImage(file="./assets/images/key.png")
                 except Exception as e:
-                    print("Error loading character image:", e)
+                    print("Error loading image:", e)
                     return
                 
         if self._collected:
             self._img = None
             
-        self._body = self._maze.win._main_canvas.create_image(self._x, self._y, image=self._img)
+        self._body = self._maze._win._content_canvas.create_image(self._x, self._y, image=self._img)
 
-        self._maze.win._root.after(100, self.draw)
+        self._maze._win._root.after(100, self.draw)

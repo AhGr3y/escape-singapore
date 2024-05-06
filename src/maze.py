@@ -23,6 +23,7 @@ class Maze():
         self.break_entrance_and_exit()
         self.break_walls()
         self.block_entrance()
+        self.block_exit()
 
     def draw_cells(self, fill_color="white"):
 

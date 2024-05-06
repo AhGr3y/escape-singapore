@@ -61,7 +61,7 @@ class Character():
         # End game when character reaches the end
         if self._col == self._maze._num_cols - 1 and self._row == self._maze._num_rows - 1:
             self._maze._win._root.destroy()
-            print(f"You win!")
+            self.escaped()
     
     def move_left(self, event):
         # Stop character from exiting edge of maze
@@ -81,7 +81,7 @@ class Character():
         # End game when character reaches the end
         if self._col == self._maze._num_cols - 1 and self._row == self._maze._num_rows - 1:
             self._maze._win._root.destroy()
-            print(f"You win!")
+            self.escaped()
 
     def move_up(self, event):
         # Stop character from exiting edge of maze
@@ -101,7 +101,7 @@ class Character():
         # End game when character reaches the end
         if self._col == self._maze._num_cols - 1 and self._row == self._maze._num_rows - 1:
             self._maze._win._root.destroy()
-            print(f"You win!")
+            self.escaped()
 
     def move_down(self, event):
         # Stop character from exiting edge of maze
@@ -121,4 +121,7 @@ class Character():
         # End game when character reaches the end
         if self._col == self._maze._num_cols - 1 and self._row == self._maze._num_rows - 1:
             self._maze._win._root.destroy()
-            print(f"Congratulations! You have escaped successfully!")
+            self.escaped()
+
+    def escaped(self):
+        print(f"Congratulations! You have escaped successfully!")
