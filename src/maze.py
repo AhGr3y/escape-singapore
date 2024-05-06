@@ -20,9 +20,7 @@ class Maze():
         self._blocked_exit_top = False
         self._blocked_exit_left = False
         self.draw_cells()
-        self.break_entrance_and_exit()
         self.break_walls()
-        self.block_entrance()
         self.block_exit()
 
     def draw_cells(self, fill_color="white"):

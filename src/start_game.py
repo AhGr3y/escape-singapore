@@ -17,9 +17,9 @@ class StartGame():
         maze = Maze(90, 60, num_row, num_col, 80, 80, win)
         escape = Path(num_col, num_row, maze)
         escape.draw_escape()
-        info = InfoPanel([], win)
         mc = Character(0, 0, maze)
         key = Item(int(num_row/2), int(num_col/2), "key", mc, maze)
-        for i in range(1, num_col - 1, 3):
+        info = InfoPanel(win, key)
+        for i in range(1, num_col - 1, 4):
             Bot(1, random.randint(0, 11), i, mc, maze)
         win._root.mainloop()
