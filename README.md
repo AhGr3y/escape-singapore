@@ -17,7 +17,7 @@ Navigate to the directory where the `~/let-me-go` is located and run the followi
 ```bash
 ./main.sh
 ```
-Make sure `main.sh` is executable by running the following command:
+Make sure `main.sh` is executable by running the following command (Unix-like OS):
 ```bash
 chmod +x main.sh
 ```
