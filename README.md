@@ -6,8 +6,8 @@ This guide will help get you started quickly with running the program.
 
 ### Requirements
 Before getting started, ensure you have the following installed:
-- Python 3.x
-- Tkinter (included with most Python installations)
+- Python 3.x - [Installing Python](https://www.python.org/downloads/)
+- Tkinter (included with most Python installations) - [Installing Tkinter](https://tkdocs.com/tutorial/install.html)
 
 ### Installation
 Clone the repository or download the source code.
