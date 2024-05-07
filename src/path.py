@@ -8,6 +8,7 @@ class Path():
         self._img = None
         self._body = None
         self._maze = maze
+        self.draw_escape()
 
     def draw_escape(self):
 

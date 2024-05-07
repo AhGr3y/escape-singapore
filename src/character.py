@@ -6,6 +6,7 @@ class Character():
         self._character = character
         self._img = None
         self._maze = maze
+        self._info = None
         self._row = row
         self._col = col
         self.draw_main_character()
@@ -23,12 +24,18 @@ class Character():
         if self._character == "default":
             global char
             try:
-                self._img = PhotoImage(file="./assets/images/default-boy.png")
+                self._img = PhotoImage(file="./assets/images/player.png")
             except Exception as e:
                 print("Error loading character image:", e)
                 return
             char = self._maze._win._content_canvas.create_image(default_x, default_y, image=self._img)
             self.enable_movement()
+
+    def kill_character(self):
+        self._img = None
+
+    def catch_character(self):
+        pass
 
     def enable_movement(self):
         # Enable movement via arrow keys
@@ -60,7 +67,6 @@ class Character():
 
         # End game when character reaches the end
         if self._col == self._maze._num_cols - 1 and self._row == self._maze._num_rows - 1:
-            self._maze._win._root.destroy()
             self.escaped()
     
     def move_left(self, event):
@@ -80,7 +86,6 @@ class Character():
 
         # End game when character reaches the end
         if self._col == self._maze._num_cols - 1 and self._row == self._maze._num_rows - 1:
-            self._maze._win._root.destroy()
             self.escaped()
 
     def move_up(self, event):
@@ -100,7 +105,6 @@ class Character():
 
         # End game when character reaches the end
         if self._col == self._maze._num_cols - 1 and self._row == self._maze._num_rows - 1:
-            self._maze._win._root.destroy()
             self.escaped()
 
     def move_down(self, event):
@@ -120,8 +124,9 @@ class Character():
 
         # End game when character reaches the end
         if self._col == self._maze._num_cols - 1 and self._row == self._maze._num_rows - 1:
-            self._maze._win._root.destroy()
             self.escaped()
 
     def escaped(self):
-        print(f"Congratulations! You have escaped successfully!")
+        self._img = None
+        if self._info is not None:
+            self._info._status = "player_escaped"

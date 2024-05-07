@@ -4,8 +4,9 @@ from tkinter import PhotoImage
 
 class Bot():
 
-    def __init__(self, level, row, col, player, maze=None):
+    def __init__(self, level, row, col, player, info_panel, maze=None):
         self._maze = maze
+        self._info_panel = info_panel
         self._level = level
         self._row = row
         self._col = col
@@ -67,7 +68,7 @@ class Bot():
 
                 # End the game if bot encounters player; additional hit box to make up for the delay, if not, player can touch bot from the back
                 if self._col == self._player._col and self._row - 1 == self._player._row:
-                    self.game_over_1()
+                    self.catch_player()
 
             # Move bot up
             if self._move_direction == "up":
@@ -76,14 +77,15 @@ class Bot():
 
                 # End the game if bot encounters player; additional hit box to make up for the delay, if not, player can touch bot from the back
                 if self._col == self._player._col and self._row + 1 == self._player._row:
-                    self.game_over_1()
+                    self.catch_player()
 
             # End the game if bot encounters player
             if self._col == self._player._col and self._row == self._player._row:
-                self.game_over_1()
+                self.catch_player()
 
             self._maze._win._root.after(300, self.patrol)
 
-    def game_over_1(self):
-        self._maze._win._root.destroy()
-        print("You got caught by a little ruffian! Game over!")
+    def catch_player(self):
+        self._player.kill_character()
+        self._info_panel._status = "player_captured"
+        
