@@ -26,4 +26,4 @@ chmod +x main.sh
 Once the program is running, you can move the character with arrow keys, or restart/quit the game with your mouse.
 
 ### Screenshot of Gameplay
-![Gameplay of Let Me Go](https://github.com/AhGr3y/let-me-go/tree/main/assets/images/let-me-go-gameplay.png)
+![Gameplay of Let Me Go](assets/images/let-me-go-gameplay.png)
