@@ -20,6 +20,6 @@ class StartGame():
         key = Item(int(num_row/2), int(num_col/2), "key", player, maze)
         info = InfoPanel(win, player, key, maze)
         player._info = info
-        for i in range(1, num_col - 1, 3):
+        for i in range(1, num_col - 1, 1):
             Bot(1, random.randint(0, 11), i, player, info, maze)
         win._root.mainloop()

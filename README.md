@@ -25,4 +25,5 @@ chmod +x main.sh
 ### Usage
 Once the program is running, you can move the character with arrow keys, or restart/quit the game with your mouse.
 
-### Example
+### Gameplay
+![Gameplay of Let Me Go](https://github.com/AhGr3y/let-me-go/tree/main/assets/videos/gameplay.mp4)
