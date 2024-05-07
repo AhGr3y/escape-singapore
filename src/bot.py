@@ -87,5 +87,6 @@ class Bot():
 
     def catch_player(self):
         self._player.kill_character()
+        self._player.captured()
         self._info_panel._status = "player_captured"
         

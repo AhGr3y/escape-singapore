@@ -131,6 +131,24 @@ class Character():
         if self._info is not None:
             self._info._status = "player_escaped"
 
+    def captured(self):
+
+        if self._maze is None:
+            raise ValueError("Maze is not defined!")
+        
+        # default spawn location
+        default_x = self._maze._x1 + self._maze._cell_width/2
+        default_y = self._maze._y1 + self._maze._cell_height/2
+
+        # draw default character
+        if self._character == "default":
+            try:
+                self._img = PhotoImage(file="./assets/images/captured-player.png")
+            except Exception as e:
+                print("Error loading character image:", e)
+                return
+            self._maze._win._content_canvas.create_image(default_x, default_y, image=self._img)
+
     def restart_game(self):
         self._row = 0
         self._col = 0
