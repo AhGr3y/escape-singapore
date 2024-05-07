@@ -3,11 +3,13 @@ from tkinter import ttk
 
 class InfoPanel():
 
-    def __init__(self, win=None, item=None):
+    def __init__(self, win=None, player=None, item=None, maze=None):
         self._win = win
+        self._maze = maze
         self._item = item
         self._status = None
         self._msg = None
+        self._player = player
         self.draw_exit_button()
         self.draw_restart_button()
         self.draw_textbox()
@@ -25,7 +27,10 @@ class InfoPanel():
         restart.place(relx=0.5, rely= 0.8, anchor='center')
 
     def restart_game(self):
-        pass
+        self._status = "items_not_collected"
+        self._item._collected = False
+        self._player.restart_game()
+        self._maze.restart_game()
 
     def draw_textbox(self):
         

@@ -197,6 +197,13 @@ class Maze():
             exit_cell._has_left_wall = False
             exit_cell.draw()
 
+    def restart_game(self):
+        self._seed = None
+        self._cells = []
+        self.draw_cells()
+        self.break_walls()
+        self.block_exit()
+
 class Wall():
 
     def __init__(self, i, j, direction):

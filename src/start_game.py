@@ -16,10 +16,10 @@ class StartGame():
         win = Window()
         maze = Maze(90, 60, num_row, num_col, 80, 80, win)
         path = Path(num_col, num_row, maze)
-        mc = Character(0, 0, maze)
-        key = Item(int(num_row/2), int(num_col/2), "key", mc, maze)
-        info = InfoPanel(win, key)
-        mc._info = info
-        for i in range(1, num_col - 1, 1):
-            Bot(1, random.randint(0, 11), i, mc, info, maze)
+        player = Character(0, 0, maze)
+        key = Item(int(num_row/2), int(num_col/2), "key", player, maze)
+        info = InfoPanel(win, player, key, maze)
+        player._info = info
+        for i in range(1, num_col - 1, 3):
+            Bot(1, random.randint(0, 11), i, player, info, maze)
         win._root.mainloop()

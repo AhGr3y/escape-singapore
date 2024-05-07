@@ -130,3 +130,8 @@ class Character():
         self._img = None
         if self._info is not None:
             self._info._status = "player_escaped"
+
+    def restart_game(self):
+        self._row = 0
+        self._col = 0
+        self.draw_main_character()
